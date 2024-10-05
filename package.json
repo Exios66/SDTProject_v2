@@ -1,49 +1,27 @@
 {
-  "name": "dark-triad-assessments",
+  "name": "dark-triad-assessments-webapp",
   "version": "1.0.0",
   "description": "Web application for Dark Triad personality assessments",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node server.js",
+    "build": "node build.js",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
-    "@svgr/webpack": "^6.5.1",
-    "chart.js": "^3.7.0",
-    "mathjs": "^9.4.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.1",
-    "resolve-url-loader": "^5.0.0",
-    "webpack-dev-server": "^4.11.1"
+    "express": "^4.17.1",
+    "ejs": "^3.1.6"
   },
   "devDependencies": {
-    "@babel/plugin-transform-private-property-in-object": "^7.22.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "eslint": "^8.0.0",
-    "eslint-config-react-app": "^7.0.0",
-    "prettier": "^2.3.2"
+    "gh-pages": "^3.2.3"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "engines": {
+    "node": ">=14.0.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "homepage": "https://[your-username].github.io/dark-triad-assessments-webapp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/[your-username]/dark-triad-assessments-webapp.git"
+  },
+  "license": "MIT"
 }

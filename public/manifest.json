@@ -1,6 +1,7 @@
 {
   "short_name": "Dark Triad",
-  "name": "Dark Triad Assessments",
+  "name": "Dark Triad Personality Assessments",
+  "description": "Take assessments to measure your Dark Triad personality traits: Machiavellianism, Narcissism, and Psychopathy.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +11,54 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#3498db",
+  "background_color": "#f4f4f4",
+  "orientation": "portrait-primary",
+  "categories": ["education", "psychology", "assessment"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "iarc_rating_id": "",
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "screenshot2.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Assessment",
+      "short_name": "Assess",
+      "description": "Begin a new Dark Triad assessment",
+      "url": "/assessment",
+      "icons": [{ "src": "assess_icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "View Results",
+      "short_name": "Results",
+      "description": "View your assessment results",
+      "url": "/results",
+      "icons": [{ "src": "results_icon.png", "sizes": "192x192" }]
+    }
+  ]
 }

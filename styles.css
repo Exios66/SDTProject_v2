@@ -1,25 +1,37 @@
 :root {
     --primary-color: #3498db;
+    --primary-color-dark: #2980b9;
     --secondary-color: #2ecc71;
     --background-color: #f4f4f4;
     --text-color: #333;
     --button-hover-color: #2980b9;
     --assessment-bg: #ffffff;
     --assessment-shadow: rgba(0, 0, 0, 0.1);
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --font-family: 'Arial', sans-serif;
+    --transition-speed: 0.3s;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-family);
     line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
     color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    font-size: 16px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .dark-mode {
     --primary-color: #2980b9;
+    --primary-color-dark: #1f6da8;
     --secondary-color: #27ae60;
     --background-color: #2c3e50;
     --text-color: #ecf0f1;
@@ -34,6 +46,12 @@ header {
     text-align: center;
     padding: 1rem;
     position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    line-height: 1.2;
 }
 
 #darkModeToggle {
@@ -45,18 +63,26 @@ header {
     font-size: 1.5rem;
     cursor: pointer;
     color: #fff;
+    transition: transform var(--transition-speed);
+}
+
+#darkModeToggle:hover {
+    transform: scale(1.1);
 }
 
 nav {
     background-color: var(--secondary-color);
     padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav ul li {
@@ -66,62 +92,99 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color var(--transition-speed);
+}
+
+nav ul li a:hover, nav ul li a:focus {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 main {
+    flex: 1;
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .assessment {
     background-color: var(--assessment-bg);
     border-radius: 5px;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
     box-shadow: 0 2px 5px var(--assessment-shadow);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-button {
+.assessment:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px var(--assessment-shadow);
+}
+
+button, .btn {
     background-color: var(--primary-color);
     color: #fff;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     cursor: pointer;
-    border-radius: 3px;
-    transition: background-color 0.3s;
+    border-radius: 4px;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
-button:hover {
+button:hover, .btn:hover {
     background-color: var(--button-hover-color);
+    transform: translateY(-2px);
+}
+
+button:active, .btn:active {
+    transform: translateY(0);
+}
+
+button:focus, .btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
 .question {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .options label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+
+.options label:hover {
+    color: var(--primary-color);
 }
 
 #results {
     background-color: var(--assessment-bg);
     border-radius: 5px;
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
     box-shadow: 0 2px 5px var(--assessment-shadow);
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #progressBarContainer {
     width: 100%;
     background-color: #ddd;
     border-radius: 5px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
 }
 
 #progressBar {
@@ -132,11 +195,14 @@ button:hover {
     text-align: center;
     line-height: 20px;
     color: white;
+    transition: width 0.5s ease-in-out;
 }
 
 .trait-explanation {
     cursor: help;
     margin-left: 5px;
+    font-size: 0.9em;
+    color: var(--primary-color);
 }
 
 @keyframes fadeIn {
@@ -158,16 +224,29 @@ button:hover {
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+}
+
+.modal.show {
+    opacity: 1;
 }
 
 .modal-content {
     background-color: var(--assessment-bg);
     margin: 15% auto;
-    padding: 20px;
+    padding: 2rem;
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
     border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(0.7);
+    transition: transform var(--transition-speed);
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
 }
 
 .close {
@@ -176,24 +255,25 @@ button:hover {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    transition: color var(--transition-speed);
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: var(--text-color);
     text-decoration: none;
-    cursor: pointer;
 }
 
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
 
 /* Accessibility improvements */
@@ -205,6 +285,7 @@ button:hover {
     color: white;
     padding: 8px;
     z-index: 100;
+    transition: top 0.3s;
 }
 
 .skip-link:focus {
@@ -213,49 +294,57 @@ button:hover {
 
 /* Form styles */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 label {
     display: block;
     margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
 input[type="text"],
 input[type="email"],
 textarea {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color var(--transition-speed);
 }
 
-/* Button styles */
-.btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: var(--primary-color-dark);
-}
-
-.btn:focus {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
     .modal-content {
         width: 95%;
         margin: 10% auto;
+        padding: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 5px 0;
     }
 }
 
@@ -266,9 +355,9 @@ textarea {
 }
 
 /* Utility classes */
-.text-center {
-    text-align: center;
-}
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
 
 .mt-1 { margin-top: 0.25rem; }
 .mt-2 { margin-top: 0.5rem; }
@@ -276,9 +365,30 @@ textarea {
 .mt-4 { margin-top: 1.5rem; }
 .mt-5 { margin-top: 3rem; }
 
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 3rem; }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 1rem; }
+.p-4 { padding: 1.5rem; }
+.p-5 { padding: 3rem; }
+
 /* Error styles */
 .error-message {
-    color: #dc3545;
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Success styles */
+.success-message {
+    color: var(--success-color);
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
@@ -295,10 +405,96 @@ textarea {
 }
 
 @keyframes spin {
-    from { will-change: transform; }
-    to { will-change: transform; transform: rotate(360deg); }
+    to { transform: rotate(360deg); }
 }
 
 .element-to-animate {
     will-change: transform;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Print styles */
+@media print {
+    body {
+        background-color: #fff;
+        color: #000;
+    }
+
+    header, nav, footer, .no-print {
+        display: none;
+    }
+
+    main {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .assessment, #results {
+        page-break-inside: avoid;
+    }
+}
+
+/* Accessibility focus styles */
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #0000FF;
+        --secondary-color: #008000;
+        --background-color: #FFFFFF;
+        --text-color: #000000;
+        --button-hover-color: #000080;
+        --assessment-bg: #FFFFFF;
+        --assessment-shadow: rgba(0, 0, 0, 0.5);
+    }
+
+    .dark-mode {
+        --primary-color: #00FFFF;
+        --secondary-color: #00FF00;
+        --background-color: #000000;
+        --text-color: #FFFFFF;
+        --button-hover-color: #80FFFF;
+        --assessment-bg: #000000;
+        --assessment-shadow: rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
 }

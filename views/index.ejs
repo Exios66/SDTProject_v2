@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Comprehensive Dark Triad Personality Assessments including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests."/>
+    <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five"/>
+    <meta name="author" content="Dark Triad Research Team"/>
+    <meta name="robots" content="index, follow"/>
+    <meta name="theme-color" content="#3498db"/>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="/logo192.png"/>
+    <link rel="manifest" href="/manifest.json"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha384-5JvA3+FaQ0/kLZYrP0tC7YSYgzEjJD/OYdBgbXNFrWk6xyl5Aq6z+1Xv9QZC3Ck2" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js" integrity="sha512-OZ4XOB5picking+/tKTkZLFnZjWVX6JGvKYuZHhZz8fhM4VlRQZyK5vv5aGgH9IQN/6Fv0ZBxA8XzvPnZ/XTb0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        console.log('HTML head script running');
+        window.addEventListener('DOMContentLoaded', (event) => {
+            console.log('DOM fully loaded and parsed');
+            if (typeof initializeApp === 'function') {
+                console.log('initializeApp function exists');
+                initializeApp();
+            } else {
+                console.error('initializeApp function not found');
+            }
+        });
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <h1><%= title %></h1>
+        <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    </header>
+    <nav id="mainNav" aria-label="Main Navigation">
+        <ul>
+            <% assessments.forEach(assessment => { %>
+                <li><a href="#<%= assessment.id %>" aria-label="Navigate to <%= assessment.name %> Assessment"><%= assessment.name %></a></li>
+            <% }); %>
+        </ul>
+    </nav>
+    <main id="main-content">
+        <section id="assessments" aria-label="Available Assessments">
+            <% assessments.forEach(assessment => { %>
+                <div id="<%= assessment.id %>" class="assessment">
+                    <h2><%= assessment.name %></h2>
+                    <p><%= assessment.description %></p>
+                    <button type="button" class="btn start-assessment" onclick="startAssessment('<%= assessment.id %>')" aria-label="Start <%= assessment.name %> Assessment">Start <%= assessment.name %></button>
+                </div>
+            <% }); %>
+        </section>
+
+        <div id="progressBarContainer" class="hidden" aria-hidden="true">
+            <div id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        </div>
+
+        <section id="assessmentQuestions" class="hidden" aria-hidden="true" aria-label="Assessment Questions"></section>
+
+        <section id="results" class="hidden" aria-hidden="true" aria-label="Assessment Results"></section>
+
+        <canvas id="resultsChart" class="hidden" aria-hidden="true"></canvas>
+
+        <section id="stroopTask" aria-labelledby="stroopTaskHeading">
+            <h2 id="stroopTaskHeading">Stroop Task</h2>
+            <div id="stroopInstructions">
+                <p>Test your cognitive flexibility with the Stroop Task.</p>
+                <button onclick="startStroopTask()" class="btn" aria-label="Begin Stroop Task">Start Stroop Task</button>
+            </div>
+            <div id="stroopGame" class="hidden" aria-hidden="true"></div>
+            <div id="stroopResults" class="hidden" aria-hidden="true"></div>
+        </section>
+
+        <section id="psychometric" aria-label="Psychometric Information"></section>
+
+        <section id="background" aria-label="Background Information"></section>
+    </main>
+
+    <div id="menuStateAnnouncement" class="visually-hidden" aria-live="polite"></div>
+
+    <div id="interpretationModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="interpretationModalTitle">
+        <div class="modal-content">
+            <h2 id="interpretationModalTitle" class="visually-hidden">Interpretation Details</h2>
+            <button class="close" onclick="closeInterpretationModal()" aria-label="Close interpretation modal">&times;</button>
+            <div id="interpretationContent"></div>
+        </div>
+    </div>
+
+    <div id="articlesModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="articlesModalTitle">
+        <div class="modal-content">
+            <h2 id="articlesModalTitle">Scientific Articles</h2>
+            <button class="close" onclick="closeModal()" aria-label="Close articles modal">&times;</button>
+            <ul id="articlesList"></ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; <%= new Date().getFullYear() %> Dark Triad Research Team. All rights reserved.</p>
+        <nav aria-label="Footer Navigation">
+            <ul>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/terms-of-service">Terms of Service</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
