@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="Comprehensive Dark Triad Personality Assessments including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests."/>
     <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five"/>
     <meta name="author" content="Dark Triad Research Team"/>
     <meta name="robots" content="index, follow"/>
-    <meta name="theme-color" content="#3498db"/>
+    <!-- Remove the unsupported meta tag for theme-color -->
     <title>Dark Triad Personality Assessments | Comprehensive Psychological Evaluation</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="apple-touch-icon" href="logo192.png"/>
-    <link rel="manifest" href="manifest.json"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha384-5JvA3+FaQ0/kLZYrP0tC7YSYgzEjJD/OYdBgbXNFrWk6xyl5Aq6z+1Xv9QZC3Ck2" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js" integrity="sha512-OZ4XOB5picking+/tKTkZLFnZjWVX6JGvKYuZHhZz8fhM4VlRQZyK5vv5aGgH9IQN/6Fv0ZBxA8XzvPnZ/XTb0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
@@ -26,7 +25,19 @@
                 console.error('initializeApp function not found');
             }
         });
+        function setThemeColor(isDark) {
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#1c5880' : '#2980b9');
+        }
+        setThemeColor(window.matchMedia('(prefers-color-scheme: dark)').matches);
+        window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+            setThemeColor(e.matches);
+        });
     </script>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #2980b9; }
+        }
+    </style>
 </head>
 <body>
     <header>

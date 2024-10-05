@@ -498,3 +498,9 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
         transition: none !important;
     }
 }
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color-scheme: light;
+    }
+}
