@@ -3,41 +3,112 @@
 {% block title %}Assessments | Dark Triad Personality Assessments{% endblock %}
 
 {% block content %}
-<section id="assessments">
-    <h2>Available Assessments</h2>
-    <div id="sdt3" class="assessment">
-        <h3>Short Dark Triad (SDT3)</h3>
-        <p>The SDT3 assesses three personality traits: Machiavellianism, Narcissism, and Psychopathy.</p>
-        <button onclick="startAssessment('sdt3')" aria-label="Begin Short Dark Triad Assessment">Start SDT3 Assessment</button>
+<section id="assessments" class="container mt-5">
+    <h2 class="mb-4">Available Assessments</h2>
+    <div id="sdt3" class="assessment card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">Short Dark Triad (SDT3)</h3>
+            <p class="card-text">The SDT3 assesses three personality traits: Machiavellianism, Narcissism, and Psychopathy. This brief 27-item questionnaire provides insights into these dark personality traits.</p>
+            <button onclick="startAssessment('sdt3')" class="btn btn-primary" aria-label="Begin Short Dark Triad Assessment">Start SDT3 Assessment</button>
+        </div>
     </div>
-    <!-- Add other assessments here -->
+    <div id="dirty_dozen" class="assessment card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">Dirty Dozen</h3>
+            <p class="card-text">The Dirty Dozen is a concise measure of the Dark Triad traits. It consists of 12 items that quickly assess Machiavellianism, Narcissism, and Psychopathy.</p>
+            <button onclick="startAssessment('dirty_dozen')" class="btn btn-primary" aria-label="Begin Dirty Dozen Assessment">Start Dirty Dozen Assessment</button>
+        </div>
+    </div>
+    <div id="sdt4" class="assessment card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">Short Dark Tetrad (SDT4)</h3>
+            <p class="card-text">The SDT4 extends the Dark Triad by including a fourth trait: Sadism. This 28-item questionnaire provides a comprehensive assessment of dark personality traits.</p>
+            <button onclick="startAssessment('sdt4')" class="btn btn-primary" aria-label="Begin Short Dark Tetrad Assessment">Start SDT4 Assessment</button>
+        </div>
+    </div>
+    <div id="mach_iv" class="assessment card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">MACH-IV</h3>
+            <p class="card-text">The MACH-IV is a 20-item scale specifically designed to measure Machiavellianism. It assesses an individual's tendency to be cynical, emotionally detached, and manipulative.</p>
+            <button onclick="startAssessment('mach_iv')" class="btn btn-primary" aria-label="Begin MACH-IV Assessment">Start MACH-IV Assessment</button>
+        </div>
+    </div>
+    <div id="mmpi" class="assessment card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">MMPI-style</h3>
+            <p class="card-text">Our MMPI-style assessment is inspired by the Minnesota Multiphasic Personality Inventory. It provides a comprehensive personality profile, including potential indicators of dark personality traits.</p>
+            <button onclick="startAssessment('mmpi')" class="btn btn-primary" aria-label="Begin MMPI-style Assessment">Start MMPI-style Assessment</button>
+        </div>
+    </div>
 </section>
 
-<div id="progressBarContainer" class="hidden" aria-hidden="true">
-    <div id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
-</div>
-
-<section id="assessmentQuestions" class="hidden" aria-hidden="true"></section>
-
-<section id="results" class="hidden" aria-hidden="true"></section>
-
-<canvas id="resultsChart" class="hidden" aria-hidden="true"></canvas>
-
-<div id="interpretationModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-labelledby="interpretationTitle">
-        <h2 id="interpretationTitle">Result Interpretation</h2>
-        <button class="close" onclick="closeInterpretationModal()" aria-label="Close interpretation modal">&times;</button>
-        <div id="interpretationContent"></div>
+<div id="progressBarContainer" class="container mt-4 mb-4 hidden" aria-hidden="true">
+    <h4>Assessment Progress</h4>
+    <div class="progress">
+        <div id="progressBar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="width: 0%"></div>
     </div>
 </div>
 
-<div id="articlesModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-labelledby="articlesTitle">
-        <h2 id="articlesTitle">Scientific Articles</h2>
-        <button class="close" onclick="closeModal()" aria-label="Close articles modal">&times;</button>
-        <ul id="articlesList"></ul>
+<section id="assessmentQuestions" class="container mt-5 hidden" aria-hidden="true">
+    <h3 id="questionTitle" class="mb-4"></h3>
+    <form id="questionForm">
+        <div id="questionContent"></div>
+        <button type="submit" class="btn btn-primary mt-3">Next Question</button>
+    </form>
+</section>
+
+<section id="results" class="container mt-5 hidden" aria-hidden="true">
+    <h3>Your Assessment Results</h3>
+    <div id="resultsContent" class="mt-4"></div>
+    <button onclick="showInterpretationModal()" class="btn btn-info mt-3">Interpret Results</button>
+</section>
+
+<div class="container mt-5 mb-5">
+    <canvas id="resultsChart" class="hidden" aria-hidden="true"></canvas>
+</div>
+
+<div id="interpretationModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="interpretationTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="interpretationTitle">Result Interpretation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeInterpretationModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="interpretationContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeInterpretationModal()">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<button id="showScientificArticles">Show Scientific Articles</button>
+<div id="articlesModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="articlesTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="articlesTitle">Scientific Articles</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul id="articlesList" class="list-group"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5 text-center">
+    <button id="showScientificArticles" class="btn btn-outline-primary">Show Scientific Articles</button>
+</div>
+
+<script src="/js/assessments.js"></script>
+<script src="/js/results_visualization.js"></script>
 {% endblock %}

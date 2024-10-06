@@ -1,49 +1,100 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Comprehensive Dark Triad Personality Assessments including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests."/>
-    <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five"/>
+    <meta name="description" content="Comprehensive Dark Triad Personality Assessments including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests. Explore the fascinating world of dark personality traits and gain insights into Machiavellianism, narcissism, psychopathy, and sadism. Our research-backed assessments provide accurate and detailed results to help you understand these complex personality constructs."/>
+    <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five, Personality Traits, Psychology, Personality Research"/>
     <meta name="author" content="Dark Triad Research Team"/>
     <meta name="robots" content="index, follow"/>
-    <title>{% block title %}Dark Triad Personality Assessments{% endblock %}</title>
+    <title>{% block title %}Dark Triad Personality Assessments | Explore Machiavellianism, Narcissism, Psychopathy, and Sadism{% endblock %}</title>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
-    <link rel="apple-touch-icon" href="/logo192.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha384-5JvA3+FaQ0/kLZYrP0tC7YSYgzEjJD/OYdBgbXNFrWk6xyl5Aq6z+1Xv9QZC3Ck2" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js" integrity="sha512-OZ4XOB5picking+/tKTkZLFnZjWVX6JGvKYuZHhZz8fhM4VlRQZyK5vv5aGgH9IQN/6Fv0ZBxA8XzvPnZ/XTb0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
     <div id="root"></div>
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
     <header>
-        <h1>Dark Triad Personality Assessments</h1>
-        <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
-    </header>
-    <nav id="mainNav" aria-label="Main Navigation">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/assessments">Assessments</a></li>
-            <li><a href="/stroop_task">Stroop Task</a></li>
-            <li><a href="/background">Background</a></li>
-        </ul>
-    </nav>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    <footer>
-        <p>&copy; 2023 Dark Triad Research Team. All rights reserved.</p>
-        <nav aria-label="Footer Navigation">
-            <ul>
-                <li><a href="/privacy_policy">Privacy Policy</a></li>
-                <li><a href="/terms_of_service">Terms of Service</a></li>
-                <li><a href="/contact">Contact Us</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main Navigation">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/logo.svg" alt="Dark Triad Personality Assessments Logo" width="30" height="30" class="d-inline-block align-top">
+                    Dark Triad Personality Assessments
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="assessmentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Assessments
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="assessmentsDropdown">
+                                <li><a class="dropdown-item" href="/assessments/sdt3">Short Dark Triad (SD3)</a></li>
+                                <li><a class="dropdown-item" href="/assessments/dirty_dozen">Dirty Dozen</a></li>
+                                <li><a class="dropdown-item" href="/assessments/sdt4">Short Dark Tetrad (SD4)</a></li>
+                                <li><a class="dropdown-item" href="/assessments/mach_iv">MACH-IV</a></li>
+                                <li><a class="dropdown-item" href="/assessments/mmpi">MMPI-style</a></li>
+                                <li><a class="dropdown-item" href="/assessments/hexaco">HEXACO</a></li>
+                                <li><a class="dropdown-item" href="/assessments/ocean">OCEAN (Big Five)</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/stroop_task">Stroop Task</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/background">Background</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+                    </ul>
+                    <button id="darkModeToggle" type="button" class="btn btn-outline-light ms-3" aria-label="Toggle dark mode">
+                        <i id="darkModeIcon" class="bi bi-moon-fill" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
         </nav>
+    </header>
+    <main id="mainContent" tabindex="-1">
+        <div class="container my-4">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    <footer class="bg-dark text-white py-3 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Dark Triad Research Team. All rights reserved.</p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline text-md-end">
+                        <li class="list-inline-item"><a href="/privacy_policy">Privacy Policy</a></li>
+                        <li class="list-inline-item"><a href="/terms_of_service">Terms of Service</a></li>
+                        <li class="list-inline-item"><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </footer>
     <script src="/script.js"></script>
     <script src="/bundle.js"></script>
     {% block scripts %}{% endblock %}
 </body>
+</html>
 </html>

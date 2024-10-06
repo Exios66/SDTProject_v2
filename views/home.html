@@ -2,10 +2,97 @@
 
 {% block title %}Home | Dark Triad Personality Assessments{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="/css/home.css">
+{% endblock %}
+
 {% block content %}
-<section id="intro">
-    <h2>Welcome to Dark Triad Personality Assessments</h2>
-    <p>Explore comprehensive psychological evaluations including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests.</p>
-    <a href="/assessments" class="btn">Start an Assessment</a>
+<section id="intro" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Welcome to Dark Triad Personality Assessments</h1>
+            <p class="lead">Explore the fascinating world of dark personality traits and gain insights into Machiavellianism, narcissism, psychopathy, and sadism.</p>
+            <hr class="my-4">
+            <p>Our comprehensive psychological evaluations include the Short Dark Triad (SD3), Dirty Dozen, Short Dark Tetrad (SD4), MACH-IV, MMPI-style, HEXACO, and OCEAN tests. These research-backed assessments provide accurate and detailed results to help you understand these complex personality constructs.</p>
+            <a href="/assessments" class="btn btn-primary btn-lg" role="button">Start an Assessment</a>
+        </div>
+        <div class="col-md-6">
+            <img src="/images/dark_triad.jpg" alt="Dark Triad Personality Traits" class="img-fluid rounded">
+        </div>
+    </div>
+</section>
+
+<section id="features" class="container my-5">
+    <h2 class="text-center mb-5">Key Features</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">Research-Backed Assessments</h4>
+                    <p class="card-text">Our assessments are based on the latest research in personality psychology, ensuring accurate and reliable results.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">Detailed Insights</h4>
+                    <p class="card-text">Receive comprehensive reports that provide in-depth insights into your personality traits and how they may influence your behavior and relationships.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">Secure and Confidential</h4>
+                    <p class="card-text">Your privacy is our top priority. All assessment responses and personal information are kept strictly confidential and secure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials" class="container my-5">
+    <h2 class="text-center mb-5">What Our Users Say</h2>
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"The Dark Triad assessments provided me with valuable insights into my personality. The results were eye-opening and helped me understand myself better."</p>
+                    <footer class="blockquote-footer">John D.</footer>
+                </blockquote>
+            </div>
+            <div class="carousel-item">
+                <blockquote class="blockquote text-center">  
+                    <p class="mb-0">"I found the assessments to be very comprehensive and the reports were detailed and easy to understand. Highly recommended!"</p>
+                    <footer class="blockquote-footer">Sarah M.</footer>
+                </blockquote>
+            </div>
+            <div class="carousel-item">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"As a researcher, I appreciate the scientific rigor behind these assessments. The results are reliable and provide a solid foundation for further exploration."</p>
+                    <footer class="blockquote-footer">Dr. Emily R.</footer>
+                </blockquote>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+<section id="cta" class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+            <h2>Ready to Discover Your Dark Side?</h2>
+            <p class="lead">Take the first step towards self-discovery and unlock the secrets of your personality.</p>
+            <a href="/assessments" class="btn btn-primary btn-lg" role="button">Get Started Now</a>
+        </div>
+    </div>
 </section>
 {% endblock %}

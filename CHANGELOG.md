@@ -1,3 +1,8 @@
+## [0.0.5] - 2024-10-06
+
+### Added
+- Error retrieving commit messages
+
 ## [0.0.4] - 2024-10-04
 
 ### Added

@@ -33,5 +33,10 @@
     "type": "git",
     "url": "https://github.com/Exios66/dark-triad-assessments-webapp.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "markdownlint": {
+    "config": {
+      "default": true
+    }
+  }
 }
