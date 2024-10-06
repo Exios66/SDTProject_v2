@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Comprehensive Dark Triad Personality Assessments including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests."/>
-    <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five"/>
+    <meta name="description" content="Comprehensive Dark Triad Personality Assessments including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests. Gain insights into your personality traits related to Machiavellianism, Narcissism, Psychopathy, and Sadism. Understand how these traits influence your behavior and interactions with others. Our assessments are based on scientific research and provide accurate and reliable results."/>
+    <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five, Personality Traits, Personality Test, Psychological Evaluation, Manipulation, Self-Promotion, Callousness, Antisocial Behavior"/>
     <meta name="author" content="Dark Triad Research Team"/>
     <meta name="robots" content="index, follow"/>
-    <!-- Remove the unsupported meta tag for theme-color -->
     <title>Dark Triad Personality Assessments | Comprehensive Psychological Evaluation</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
@@ -19,14 +18,19 @@
         window.addEventListener('DOMContentLoaded', (event) => {
             console.log('DOM fully loaded and parsed');
             if (typeof initializeApp === 'function') {
-                console.log('initializeApp function exists');
+                console.log('initializeApp function exists, calling it now');
                 initializeApp();
             } else {
-                console.error('initializeApp function not found');
+                console.error('initializeApp function not found, unable to initialize the application');
             }
         });
         function setThemeColor(isDark) {
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#1c5880' : '#2980b9');
+            const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+            if (themeColorMeta) {
+                themeColorMeta.setAttribute('content', isDark ? '#1c5880' : '#2980b9');
+            } else {
+                console.warn('Theme color meta tag not found in the document head');
+            }
         }
         setThemeColor(window.matchMedia('(prefers-color-scheme: dark)').matches);
         window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
@@ -35,15 +39,179 @@
     </script>
     <style>
         @media (prefers-color-scheme: dark) {
-            body { background-color: #2980b9; }
+            body { 
+                background-color: #1c5880;
+                color: #f0f0f0; 
+            }
+            .assessment {
+                background-color: #34495e;
+                box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+            }
+            button {
+                background-color: #3498db;
+                color: #fff;
+            }
+            button:hover {
+                background-color: #2980b9;
+            }
+            .modal-content {
+                background-color: #2c3e50;
+                color: #ecf0f1;
+            }
+            .close {
+                color: #ecf0f1;
+            }
+            .close:hover,
+            .close:focus {
+                color: #bdc3c7;
+            }
         }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-content-link">Skip to main content</a>
+    
     <header>
-        <h1>Dark Triad Personality Assessments</h1>
-        <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+        <div class="header-content">
+            <div class="logo">
+                <img src="logo.png" alt="Dark Triad Personality Assessments Logo" width="50" height="50"/>
+            </div>
+            <h1>Dark Triad Personality Assessments</h1>
+            <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">
+                <span class="icon">🌙</span>
+                <span class="text">Dark Mode</span>
+            </button>
+        </div>
+        <nav id="mainNav" aria-label="Main Navigation">
+            <ul>
+                <li><a href="#sdt3" aria-label="Navigate to Short Dark Triad Assessment">SDT3</a></li>
+                <li><a href="#dirtyDozen" aria-label="Navigate to Dirty Dozen Assessment">Dirty Dozen</a></li>
+                <li><a href="#sdt4" aria-label="Navigate to Short Dark Tetrad Assessment">SDT4</a></li>
+                <li><a href="#machIV" aria-label="Navigate to MACH IV Assessment">MACH IV</a></li>
+                <li><a href="#mmpi" aria-label="Navigate to MMPI-style Assessment">MMPI-style</a></li>
+                <li><a href="#hexaco" aria-label="Navigate to HEXACO Assessment">HEXACO</a></li>
+                <li><a href="#ocean" aria-label="Navigate to OCEAN Assessment">OCEAN</a></li>
+            </ul>
+        </nav>
     </header>
+    
+    <main id="main-content">
+        <section id="hero">
+            <article class="hero-content">
+                <h2>Discover Your Dark Personality Traits</h2>
+                <p>Take our comprehensive assessments to gain insights into your Machiavellianism, Narcissism, Psychopathy, and Sadism levels. Understand how these traits influence your behavior and interactions with others.</p>
+                <a href="#assessments" class="btn btn-primary btn-lg" aria-label="Explore Assessments">Explore Assessments</a>
+            </article>
+        </section>
+        
+        <section id="assessments">
+            <h2>Personality Assessments</h2>
+            <ul class="grid">
+                <li id="sdt3" class="assessment card">
+                    <h3>Short Dark Triad (SDT3)</h3>
+                    <p>The SDT3 assesses three personality traits: Machiavellianism, Narcissism, and Psychopathy. This concise test provides insights into manipulative tendencies, self-aggrandizement, and callousness.</p>
+                    <button onclick="startAssessment('sdt3')" aria-label="Begin Short Dark Triad Assessment" class="btn btn-primary">Start SDT3 Assessment</button>
+                </li>
+                <li id="dirtyDozen" class="assessment card">
+                    <h3>Dirty Dozen</h3>
+                    <p>The Dirty Dozen is a brief measure of the Dark Triad personality traits. It efficiently captures Machiavellianism, Narcissism, and Psychopathy using only 12 items.</p>
+                    <button type="button" onclick="startAssessment('dirtyDozen')" aria-label="Begin Dirty Dozen Assessment" class="btn btn-primary">Start Dirty Dozen Assessment</button>
+                </li>
+                <li id="sdt4-assessment-card-unique" class="assessment card">
+                    <h3>Short Dark Tetrad (SDT4)</h3>
+                    <p>The SDT4 measures four dark personality traits: Machiavellianism, Narcissism, Psychopathy, and Sadism. This expanded version includes the often-overlooked trait of everyday sadism.</p>
+                    <button type="button" onclick="startAssessment('sdt4')" aria-label="Begin Short Dark Tetrad Assessment" class="btn btn-primary">Start SDT4 Assessment</button>
+                </li>
+                <li id="machIV" class="assessment card">
+                    <h3>MACH IV</h3>
+                    <p>The MACH IV is a comprehensive test of Machiavellianism, measuring a person's willingness to manipulate others. It delves deep into strategic social conduct and cynical worldview.</p>
+                    <button type="button" onclick="startAssessment('machIV')" aria-label="Begin MACH IV Assessment" class="btn btn-primary">Start MACH IV Assessment</button>
+                </li>
+                <li id="mmpi-assessment" class="assessment card">
+                    <h3>MMPI-style Assessment</h3>
+                    <p>This assessment focuses on psychiatric disorder traits, drawing inspiration from the Minnesota Multiphasic Personality Inventory. It explores various aspects of personality and potential psychopathology.</p>
+                    <button type="button" onclick="startAssessment('mmpi')" aria-label="Begin MMPI-style Assessment" class="btn btn-primary">Start MMPI-style Assessment</button>
+                </li>
+                <li class="assessment card" data-assessment="hexaco">
+                    <h3>HEXACO Personality Assessment</h3>
+                    <p>This assessment measures six personality traits: Honesty-Humility, Emotionality, Extraversion, Agreeableness, Conscientiousness, and Openness to Experience. HEXACO provides a comprehensive view of personality structure.</p>
+                    <button type="button" onclick="startAssessment('hexaco')" aria-label="Begin HEXACO Assessment" class="btn btn-primary">Start HEXACO Assessment</button>
+                </li>
+                <li class="assessment card">
+                    <h3>OCEAN (Big Five) Personality Assessment</h3>
+                    <p>This assessment measures five personality traits: Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism. The OCEAN model is widely used in psychological research and provides a broad overview of personality.</p>
+                    <button type="button" onclick="startAssessment('ocean')" aria-label="Begin OCEAN Assessment" class="btn btn-primary">Start OCEAN Assessment</button>
+                </li>
+            </ul>
+        </section>
+
+        <aside class="progress-bar-container hidden" aria-hidden="true">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-bar-fill"></div>
+                <span class="progress-bar-label">0%</span>
+            </div>
+        </aside>
+
+        <section class="assessment-questions hidden" aria-hidden="true">
+            <h2 id="assessmentTitle"></h2>
+            <form id="assessmentForm">
+                <ol id="questionList"></ol>
+                <button type="submit" id="submitAssessment" aria-label="Submit Assessment">Submit</button>
+            </form>
+        </section>
+
+        <section class="results-section hidden" aria-hidden="true">
+            <h2>Assessment Results</h2>
+            <div id="resultsContent"></div>
+            <button type="button" onclick="showInterpretationModal()" aria-label="Interpret Results" class="btn btn-primary">Interpret Results</button>
+            <button type="button" onclick="showArticlesModal()" aria-label="View Scientific Articles" class="btn btn-secondary">View Scientific Articles</button>
+        </section>
+
+        <canvas id="resultsChart" class="hidden" aria-hidden="true"></canvas>
+
+        <section id="stroopTask">
+            <h2>Stroop Task</h2>
+            <article id="stroopInstructions">
+                <p>Test your cognitive flexibility with the Stroop Task. This classic psychological test measures your ability to process conflicting information.</p>
+                <p>In this task, you will be presented with a series of color words (e.g., "red", "blue", "green") displayed in different font colors. Your goal is to identify the font color of each word, ignoring the meaning of the word itself.</p>
+                <p>For example, if the word "red" is displayed in a blue font color, the correct answer would be "blue".</p>
+                <p>The task will become increasingly challenging as you progress, with the font colors and word meanings becoming more incongruent. This tests your ability to inhibit your automatic response (reading the word) and focus on the relevant information (the font color).</p>
+                <p>To begin the Stroop Task, click the "Start" button below. You will have a limited time to respond to each word, so try to answer as quickly and accurately as possible. Your reaction time and accuracy will be measured and displayed at the end of the task.</p>
+                <p>Good luck!</p>
+                <button type="button" onclick="startStroopTask()" aria-label="Begin Stroop Task" class="btn btn-primary">Start Stroop Task</button>
+            </article>
+            <div class="stroop-game-container hidden" aria-hidden="true">
+                <div id="stroopWord" class="stroop-word"></div>
+                <div id="stroopButtons" class="stroop-buttons">
+                    <button type="button" onclick="selectColor('red')" aria-label="Select Red" class="btn btn-danger">Red</button>
+                    <button type="button" onclick="selectColor('blue')" aria-label="Select Blue" class="btn btn-primary">Blue</button>
+                    <button type="button" onclick="selectColor('green')" aria-label="Select Green" class="btn btn-success">Green</button>
+                </div>
+                <div id="stroopProgress" class="stroop-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div class="progress-bar-fill"></div>
+                    <span class="progress-bar-label">60</span>
+                </div>
+            </div>
+            <div id="stroopResults" class="hidden" aria-hidden="true">
+                <h3>Stroop Task Results</h3>
+                <p>Accuracy: <span id="accuracyScore"></span>%</p>
+                <p>Average Reaction Time: <span id="avgReactionTime"></span> ms</p>
+                <button type="button" onclick="restartStroopTask()" aria-label="Restart Stroop Task" class="btn btn-primary">Restart Task</button>
+            </div>
+        </section>
+
+        <section id="psychometric">
+            <h2>Psychometric Properties</h2>
+            <p>The Dark Triad and related personality assessments used on this website have been validated through rigorous scientific research. They demonstrate strong psychometric properties, including:</p>
+            <ul>
+                <li><strong>Reliability:</strong> The assessments have high internal consistency and test-retest reliability, ensuring that the results are consistent and stable over time.</li>
+                <li><strong>Validity:</strong> The assessments have been shown to measure the intended personality traits accurately, with strong convergent and discriminant validity.</li>
+                <li><strong>Factor Structure:</strong> Confirmatory factor analyses have supported the theoretical factor structures of the assessments, indicating that they measure distinct but related personality traits.</li>
+                <li><strong>Predictive Validity:</strong> The assessments have demonstrated predictive validity, meaning that scores on these measures are associated with relevant real-world outcomes, such as interpersonal behavior, career success, and mental health.</li>
+            </ul>
+            <p>By using these scientifically validated assessments, we ensure that the insights provided are accurate, reliable, and meaningful. Our team of researchers continuously monitors the latest developments in personality psychology to maintain the highest standards of psychometric quality.</p>
+        </section>
+
     <nav id="mainNav" aria-label="Main Navigation">
         <ul>
             <li><a href="#sdt3" aria-label="Navigate to Short Dark Triad Assessment">SDT3</a></li>
@@ -67,7 +235,7 @@
                 <p>The Dirty Dozen is a brief measure of the Dark Triad personality traits. It efficiently captures Machiavellianism, Narcissism, and Psychopathy using only 12 items.</p>
                 <button type="button" onclick="startAssessment('dirtyDozen')" aria-label="Begin Dirty Dozen Assessment">Start Dirty Dozen Assessment</button>
             </div>
-            <div id="sdt4" class="assessment">
+            <div id="sdt4-assessment-card-unique" class="assessment">
                 <h2>Short Dark Tetrad (SDT4)</h2>
                 <p>The SDT4 measures four dark personality traits: Machiavellianism, Narcissism, Psychopathy, and Sadism. This expanded version includes the often-overlooked trait of everyday sadism.</p>
                 <button type="button" onclick="startAssessment('sdt4')" aria-label="Begin Short Dark Tetrad Assessment">Start SDT4 Assessment</button>
@@ -77,30 +245,30 @@
                 <p>The MACH IV is a comprehensive test of Machiavellianism, measuring a person's willingness to manipulate others. It delves deep into strategic social conduct and cynical worldview.</p>
                 <button type="button" onclick="startAssessment('machIV')" aria-label="Begin MACH IV Assessment">Start MACH IV Assessment</button>
             </div>
-            <div id="mmpi" class="assessment">
+            <div id="mmpi-assessment" class="assessment">
                 <h2>MMPI-style Assessment</h2>
                 <p>This assessment focuses on psychiatric disorder traits, drawing inspiration from the Minnesota Multiphasic Personality Inventory. It explores various aspects of personality and potential psychopathology.</p>
                 <button type="button" onclick="startAssessment('mmpi')" aria-label="Begin MMPI-style Assessment">Start MMPI-style Assessment</button>
             </div>
-            <div id="hexaco" class="assessment">
+            <div class="assessment" data-assessment="hexaco">
                 <h2>HEXACO Personality Assessment</h2>
                 <p>This assessment measures six personality traits: Honesty-Humility, Emotionality, Extraversion, Agreeableness, Conscientiousness, and Openness to Experience. HEXACO provides a comprehensive view of personality structure.</p>
                 <button type="button" onclick="startAssessment('hexaco')" aria-label="Begin HEXACO Assessment">Start HEXACO Assessment</button>
             </div>
-            <div id="ocean" class="assessment">
+            <div class="assessment">
                 <h2>OCEAN (Big Five) Personality Assessment</h2>
                 <p>This assessment measures five personality traits: Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism. The OCEAN model is widely used in psychological research and provides a broad overview of personality.</p>
                 <button type="button" onclick="startAssessment('ocean')" aria-label="Begin OCEAN Assessment">Start OCEAN Assessment</button>
             </div>
         </section>
 
-        <div id="progressBarContainer" class="hidden" aria-hidden="true">
-            <div id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        <div class="progress-bar-container hidden" aria-hidden="true">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
         </div>
 
-        <section id="assessmentQuestions" class="hidden" aria-hidden="true"></section>
+        <section class="assessment-questions hidden" aria-hidden="true"></section>
 
-        <section id="results" class="hidden" aria-hidden="true"></section>
+        <section class="results-section hidden" aria-hidden="true"></section>
 
         <canvas id="resultsChart" class="hidden" aria-hidden="true"></canvas>
 
@@ -108,9 +276,9 @@
             <h2>Stroop Task</h2>
             <div id="stroopInstructions">
                 <p>Test your cognitive flexibility with the Stroop Task. This classic psychological test measures your ability to process conflicting information.</p>
-                <button onclick="startStroopTask()" aria-label="Begin Stroop Task">Start Stroop Task</button>
+                <button type="button" onclick="startStroopTask()" aria-label="Begin Stroop Task">Start Stroop Task</button>
             </div>
-            <div id="stroopGame" class="hidden" aria-hidden="true"></div>
+            <div class="stroop-game-container hidden" aria-hidden="true"></div>
             <div id="stroopResults" class="hidden" aria-hidden="true"></div>
         </section>
 

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Background | Dark Triad Personality Assessments{% endblock %}
+
+{% block content %}
+<section id="background">
+    <h2>Background Information</h2>
+    <p>The Dark Triad and related personality assessments are crucial tools in understanding complex personality traits. These tests help identify tendencies towards manipulation, self-promotion, emotional coldness, and other characteristics associated with antisocial behavior.</p>
+    <p>While these traits are often viewed negatively, research suggests they may also contribute to success in certain fields, such as business and politics. It's important to approach these assessments with an open mind and remember that personality is complex and multifaceted.</p>
+    <button onclick="toggleMoreHistory()">Show More</button>
+    <div id="moreHistory" class="hidden">
+        <p>Additional historical information and research milestones...</p>
+        <h4>Key Researchers:</h4>
+        <ul>
+            <li>Delroy L. Paulhus</li>
+            <li>Kevin M. Williams</li>
+            <li>Daniel N. Jones</li>
+            <li>Robert D. Hare (Psychopathy research)</li>
+        </ul>
+        <h4>Important Studies:</h4>
+        <ul>
+            <li>Paulhus, D. L., & Williams, K. M. (2002). The Dark Triad of personality: Narcissism, Machiavellianism, and psychopathy.</li>
+            <li>Jones, D. N., & Paulhus, D. L. (2014). Introducing the Short Dark Triad (SD3): A brief measure of dark personality traits.</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Assessments | Dark Triad Personality Assessments{% endblock %}
+
+{% block content %}
+<section id="assessments">
+    <h2>Available Assessments</h2>
+    <div id="sdt3" class="assessment">
+        <h3>Short Dark Triad (SDT3)</h3>
+        <p>The SDT3 assesses three personality traits: Machiavellianism, Narcissism, and Psychopathy.</p>
+        <button onclick="startAssessment('sdt3')" aria-label="Begin Short Dark Triad Assessment">Start SDT3 Assessment</button>
+    </div>
+    <!-- Add other assessments here -->
+</section>
+
+<div id="progressBarContainer" class="hidden" aria-hidden="true">
+    <div id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+</div>
+
+<section id="assessmentQuestions" class="hidden" aria-hidden="true"></section>
+
+<section id="results" class="hidden" aria-hidden="true"></section>
+
+<canvas id="resultsChart" class="hidden" aria-hidden="true"></canvas>
+
+<div id="interpretationModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-labelledby="interpretationTitle">
+        <h2 id="interpretationTitle">Result Interpretation</h2>
+        <button class="close" onclick="closeInterpretationModal()" aria-label="Close interpretation modal">&times;</button>
+        <div id="interpretationContent"></div>
+    </div>
+</div>
+
+<div id="articlesModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-labelledby="articlesTitle">
+        <h2 id="articlesTitle">Scientific Articles</h2>
+        <button class="close" onclick="closeModal()" aria-label="Close articles modal">&times;</button>
+        <ul id="articlesList"></ul>
+    </div>
+</div>
+
+<button id="showScientificArticles">Show Scientific Articles</button>
+{% endblock %}
