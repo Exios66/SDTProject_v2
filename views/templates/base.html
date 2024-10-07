@@ -3,45 +3,114 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Comprehensive Dark Triad Personality Assessments including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests."/>
-    <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five"/>
+    <meta name="description" content="Comprehensive Dark Triad Personality Assessments including SDT3, Dirty Dozen, SDT4, MACH IV, MMPI-style, HEXACO, and OCEAN tests. Explore your personality traits and understand the complexities of human behavior."/>
+    <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five, SDT3, Dirty Dozen, SDT4, MACH IV, MMPI"/>
     <meta name="author" content="Dark Triad Research Team"/>
     <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Dark Triad Personality Assessments"/>
+    <meta property="og:description" content="Explore your personality with comprehensive Dark Triad assessments. Understand Machiavellianism, Narcissism, Psychopathy, and more."/>
+    <meta property="og:image" content="/og-image.jpg"/>
+    <meta name="twitter:card" content="summary_large_image"/>
     <title>{% block title %}Dark Triad Personality Assessments{% endblock %}</title>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="apple-touch-icon" href="/logo192.png"/>
+    <link rel="manifest" href="/manifest.json"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha384-5JvA3+FaQ0/kLZYrP0tC7YSYgzEjJD/OYdBgbXNFrWk6xyl5Aq6z+1Xv9QZC3Ck2" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js" integrity="sha512-OZ4XOB5picking+/tKTkZLFnZjWVX6JGvKYuZHhZz8fhM4VlRQZyK5vv5aGgH9IQN/6Fv0ZBxA8XzvPnZ/XTb0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
     <header>
-        <h1>Dark Triad Personality Assessments</h1>
-        <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+        <div class="header-content">
+            <h1>Dark Triad Personality Assessments</h1>
+            <div class="header-controls">
+                <button id="darkModeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+                <select id="languageSelector" aria-label="Select language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                </select>
+            </div>
+        </div>
     </header>
     <nav id="mainNav" aria-label="Main Navigation">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/assessments">Assessments</a></li>
-            <li><a href="/stroop_task">Stroop Task</a></li>
-            <li><a href="/background">Background</a></li>
+            <li><a href="/" {% if request.path == '/' %}aria-current="page"{% endif %}>Home</a></li>
+            <li><a href="/assessments" {% if request.path == '/assessments' %}aria-current="page"{% endif %}>Assessments</a></li>
+            <li><a href="/stroop_task" {% if request.path == '/stroop_task' %}aria-current="page"{% endif %}>Stroop Task</a></li>
+            <li><a href="/background" {% if request.path == '/background' %}aria-current="page"{% endif %}>Background</a></li>
+            <li><a href="/research" {% if request.path == '/research' %}aria-current="page"{% endif %}>Research</a></li>
+            <li><a href="/faq" {% if request.path == '/faq' %}aria-current="page"{% endif %}>FAQ</a></li>
         </ul>
     </nav>
     <main>
         {% block content %}{% endblock %}
     </main>
     <footer>
-        <p>&copy; 2023 Dark Triad Research Team. All rights reserved.</p>
-        <nav aria-label="Footer Navigation">
-            <ul>
-                <li><a href="/privacy_policy">Privacy Policy</a></li>
-                <li><a href="/terms_of_service">Terms of Service</a></li>
-                <li><a href="/contact">Contact Us</a></li>
-            </ul>
-        </nav>
+        <div class="footer-content">
+            <p>&copy; {% now 'Y' %} Dark Triad Research Team. All rights reserved.</p>
+            <nav aria-label="Footer Navigation">
+                <ul>
+                    <li><a href="/privacy_policy">Privacy Policy</a></li>
+                    <li><a href="/terms_of_service">Terms of Service</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                    <li><a href="/sitemap">Sitemap</a></li>
+                    <li><a href="/accessibility">Accessibility</a></li>
+                </ul>
+            </nav>
+            <div class="social-links">
+                <a href="https://twitter.com/DarkTriadResearch" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter">
+                    <img src="/twitter-icon.svg" alt="Twitter" width="24" height="24">
+                </a>
+                <a href="https://www.facebook.com/DarkTriadResearch" target="_blank" rel="noopener noreferrer" aria-label="Like us on Facebook">
+                    <img src="/facebook-icon.svg" alt="Facebook" width="24" height="24">
+                </a>
+                <a href="https://www.linkedin.com/company/dark-triad-research" target="_blank" rel="noopener noreferrer" aria-label="Connect with us on LinkedIn">
+                    <img src="/linkedin-icon.svg" alt="LinkedIn" width="24" height="24">
+                </a>
+            </div>
+        </div>
     </footer>
     <script src="/script.js"></script>
+    <script>
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            darkModeToggle.innerHTML = isDarkMode ? '☀️' : '🌙';
+            darkModeToggle.setAttribute('aria-label', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode');
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '☀️';
+            darkModeToggle.setAttribute('aria-label', 'Switch to light mode');
+        }
+
+        // Language selector functionality
+        const languageSelector = document.getElementById('languageSelector');
+        languageSelector.addEventListener('change', (event) => {
+            const selectedLanguage = event.target.value;
+            // Here you would implement the logic to change the language
+            // This could involve making an AJAX request to the server to get the translated content
+            // or switching to a different version of the site
+            console.log(`Language changed to: ${selectedLanguage}`);
+            // For demonstration, we'll just reload the page
+            window.location.reload();
+        });
+
+        // Set initial language based on user's browser settings or previous selection
+        const userLanguage = navigator.language || navigator.userLanguage;
+        languageSelector.value = userLanguage.split('-')[0]; // Set to the base language code
+    </script>
     {% block scripts %}{% endblock %}
+    <!-- Google Analytics or other analytics script could be added here -->
 </body>
 </html>

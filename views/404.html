@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -9,6 +8,7 @@
     <title>404 - Page Not Found | Dark Triad Personality Assessments</title>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/logo192.png">
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
       // https://github.com/rafrex/spa-github-pages
@@ -50,6 +50,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+        color: #333333;
       }
       .error-container {
         text-align: center;
@@ -57,6 +58,8 @@
         padding: 2rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 90%;
       }
       h1 {
         color: #333333;
@@ -67,6 +70,7 @@
         color: #666666;
         font-size: 1.1rem;
         margin-bottom: 1.5rem;
+        line-height: 1.5;
       }
       .btn {
         display: inline-block;
@@ -76,41 +80,195 @@
         padding: 0.75rem 1.5rem;
         border-radius: 4px;
         font-weight: bold;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, transform 0.2s ease;
       }
       .btn:hover {
         background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+      .btn:active {
+        transform: translateY(0);
+      }
+      .error-code {
+        font-size: 6rem;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .suggestions {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e0e0e0;
+      }
+      .suggestions h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .suggestions ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .suggestions li {
+        margin-bottom: 0.5rem;
+      }
+      .suggestions a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .suggestions a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #1a1a1a;
+          color: #f0f0f0;
+        }
+        .error-container {
+          background-color: #2a2a2a;
+        }
+        h1, .error-code {
+          color: #ffffff;
+        }
+        p {
+          color: #cccccc;
+        }
+        .btn {
+          background-color: #0056b3;
+        }
+        .btn:hover {
+          background-color: #003d82;
+        }
+        .suggestions {
+          border-top-color: #444444;
+        }
+        .suggestions a {
+          color: #4da3ff;
+        }
+        .suggestions a:hover {
+          color: #80bdff;
+        }
       }
     </style>
   </head>
   <body>
     <div class="error-container">
-      <h1>404 - Page Not Found</h1>
-      <p>We're sorry, but the page you're looking for doesn't exist or has been moved.</p>
+      <div class="error-code">404</div>
+      <h1>Page Not Found</h1>
+      <p>We're sorry, but the page you're looking for doesn't exist or has been moved. This could be due to a mistyped URL, an outdated link, or a page that has been removed from our website.</p>
       <a href="/" class="btn">Go to Homepage</a>
+      <div class="suggestions">
+        <h2>You might find these helpful:</h2>
+        <ul>
+          <li><a href="/assessments">Take a Dark Triad Assessment</a></li>
+          <li><a href="/stroop_task">Try the Stroop Task</a></li>
+          <li><a href="/research">Explore Our Research</a></li>
+          <li><a href="/faq">Check our FAQ</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
     </div>
     <script>
-      // Additional error logging (if needed)
-      console.error('404 error occurred. URL:', window.location.href);
-      
-      // You can add more complex error handling or analytics here
-      // For example, sending error data to a logging service
-      function logError(errorDetails) {
-        // Implement your error logging logic here
-        // This is just a placeholder function
-        console.log('Logging error:', errorDetails);
-      }
-      
-      logError({
-        type: '404',
-        url: window.location.href,
-        timestamp: new Date().toISOString()
-      });
-      
-      // Automatically redirect to homepage after 10 seconds
-      setTimeout(function() {
-        window.location.href = '/';
-      }, 10000);
+      // Enhanced error logging and analytics
+      (function() {
+        function logError(errorDetails) {
+          // Implement comprehensive error logging
+          const errorLogEndpoint = '/api/log-error';
+          
+          // Prepare additional context data
+          const contextData = {
+            darkMode: localStorage.getItem('darkMode') === 'true',
+            language: document.documentElement.lang,
+            screenSize: `${window.innerWidth}x${window.innerHeight}`,
+            lastVisitedPage: sessionStorage.getItem('lastVisitedPage') || 'Unknown'
+          };
+
+          // Merge error details with context data
+          const fullErrorDetails = { ...errorDetails, ...contextData };
+
+          // Log to console for debugging
+          console.log('Logging error:', fullErrorDetails);
+
+          // Send error data to server
+          fetch(errorLogEndpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fullErrorDetails),
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Error logging failed');
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log('Error logged successfully:', data);
+          })
+          .catch(err => {
+            console.error('Error logging failed:', err);
+          });
+
+          // Integrate with analytics service if available
+          if (typeof gtag === 'function') {
+            gtag('event', 'error_404', {
+              'event_category': 'Error',
+              'event_label': fullErrorDetails.url,
+              'value': 1
+            });
+          }
+          // Example: Sending error data to a hypothetical API endpoint
+          fetch('/api/log-error', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(errorDetails),
+          }).catch(err => console.error('Error logging failed:', err));
+        }
+        
+        // Log the 404 error
+        logError({
+          type: '404',
+          url: window.location.href,
+          referrer: document.referrer,
+          userAgent: navigator.userAgent,
+          timestamp: new Date().toISOString()
+        });
+        
+        // Track 404 errors in analytics (if using a service like Google Analytics)
+        if (typeof ga === 'function') {
+          ga('send', 'event', '404 Error', window.location.pathname, document.referrer);
+        }
+        
+        // Automatically redirect to homepage after 30 seconds
+        var secondsLeft = 30;
+        var countdownElement = document.createElement('p');
+        countdownElement.id = 'countdown';
+        document.querySelector('.error-container').appendChild(countdownElement);
+        
+        function updateCountdown() {
+          countdownElement.textContent = `Redirecting to homepage in ${secondsLeft} seconds...`;
+          if (secondsLeft > 0) {
+            secondsLeft--;
+            setTimeout(updateCountdown, 1000);
+          } else {
+            window.location.href = '/';
+          }
+        }
+        
+        updateCountdown();
+        
+        // Add event listener for the homepage button to cancel the auto-redirect
+        document.querySelector('.btn').addEventListener('click', function(e) {
+          e.preventDefault();
+          clearTimeout(updateCountdown);
+          window.location.href = '/';
+        });
+      })();
     </script>
   </body>
 </html>

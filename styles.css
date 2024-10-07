@@ -506,9 +506,15 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
 }
 
 #stroopLeaderboardSection {
-    /* existing styles */
+    display: block; /* or any other relevant style */
 }
 
+
+
 #stroopResultsSection {
-    /* existing styles */
+    display: block; /* or any other relevant style */
+}
+
+#task {
+    display: none;
 }

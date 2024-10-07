@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -8,8 +7,17 @@
     <meta name="keywords" content="Dark Triad, Personality Assessment, Machiavellianism, Narcissism, Psychopathy, Sadism, HEXACO, OCEAN, Big Five, Personality Traits, Psychology, Personality Research"/>
     <meta name="author" content="Dark Triad Research Team"/>
     <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="{% block og_title %}Dark Triad Personality Assessments | Explore Machiavellianism, Narcissism, Psychopathy, and Sadism{% endblock %}"/>
+    <meta property="og:description" content="{% block og_description %}Comprehensive Dark Triad Personality Assessments. Explore the fascinating world of dark personality traits and gain insights into Machiavellianism, narcissism, psychopathy, and sadism.{% endblock %}"/>
+    <meta property="og:image" content="{% block og_image %}/og-image.jpg{% endblock %}"/>
+    <meta property="og:url" content="{{ request.url }}"/>
+    <meta property="og:type" content="website"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@DarkTriadResearch"/>
     <title>{% block title %}Dark Triad Personality Assessments | Explore Machiavellianism, Narcissism, Psychopathy, and Sadism{% endblock %}</title>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -17,14 +25,23 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
-    <!-- Remove unsupported meta tag -->
+    <meta name="color-scheme" content="light dark">
+    <style>
+        :root { --theme-color: #000000; }
+        @media (prefers-color-scheme: dark) {
+            :root { --theme-color: #000000; }
+        }
+        body { 
+            background-color: var(--theme-color); 
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha384-5JvA3+FaQ0/kLZYrP0tC7YSYgzEjJD/OYdBgbXNFrWk6xyl5Aq6z+1Xv9QZC3Ck2" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js" integrity="sha512-OZ4XOB5picking+/tKTkZLFnZjWVX6JGvKYuZHhZz8fhM4VlRQZyK5vv5aGgH9IQN/6Fv0ZBxA8XzvPnZ/XTb0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {% block head %}{% endblock %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div id="root"></div>
-    <a href="#mainContent" class="skip-link">Skip to main content</a>
+    <a href="#mainContent" class="visually-hidden-focusable">Skip to main content</a>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main Navigation">
             <div class="container">
@@ -38,63 +55,99 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
+                            <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/" {% if request.path == '/' %}aria-current="page"{% endif %}>Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="assessmentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle {% if '/assessments/' in request.path %}active{% endif %}" href="#" id="assessmentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Assessments
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="assessmentsDropdown">
-                                <li><a class="dropdown-item" href="/assessments/sdt3">Short Dark Triad (SD3)</a></li>
-                                <li><a class="dropdown-item" href="/assessments/dirty_dozen">Dirty Dozen</a></li>
-                                <li><a class="dropdown-item" href="/assessments/sdt4">Short Dark Tetrad (SD4)</a></li>
-                                <li><a class="dropdown-item" href="/assessments/mach_iv">MACH-IV</a></li>
-                                <li><a class="dropdown-item" href="/assessments/mmpi">MMPI-style</a></li>
-                                <li><a class="dropdown-item" href="/assessments/hexaco">HEXACO</a></li>
-                                <li><a class="dropdown-item" href="/assessments/ocean">OCEAN (Big Five)</a></li>
+                                <li><a class="dropdown-item {% if request.path == '/assessments/sdt3' %}active{% endif %}" href="/assessments/sdt3">Short Dark Triad (SD3)</a></li>
+                                <li><a class="dropdown-item {% if request.path == '/assessments/dirty_dozen' %}active{% endif %}" href="/assessments/dirty_dozen">Dirty Dozen</a></li>
+                                <li><a class="dropdown-item {% if request.path == '/assessments/sdt4' %}active{% endif %}" href="/assessments/sdt4">Short Dark Tetrad (SD4)</a></li>
+                                <li><a class="dropdown-item {% if request.path == '/assessments/mach_iv' %}active{% endif %}" href="/assessments/mach_iv">MACH-IV</a></li>
+                                <li><a class="dropdown-item {% if request.path == '/assessments/mmpi' %}active{% endif %}" href="/assessments/mmpi">MMPI-style</a></li>
+                                <li><a class="dropdown-item {% if request.path == '/assessments/hexaco' %}active{% endif %}" href="/assessments/hexaco">HEXACO</a></li>
+                                <li><a class="dropdown-item {% if request.path == '/assessments/ocean' %}active{% endif %}" href="/assessments/ocean">OCEAN (Big Five)</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/stroop_task">Stroop Task</a>
+                            <a class="nav-link {% if request.path == '/stroop_task' %}active{% endif %}" href="/stroop_task" {% if request.path == '/stroop_task' %}aria-current="page"{% endif %}>Stroop Task</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/background">Background</a>
+                            <a class="nav-link {% if request.path == '/background' %}active{% endif %}" href="/background" {% if request.path == '/background' %}aria-current="page"{% endif %}>Background</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
+                            <a class="nav-link {% if request.path == '/contact' %}active{% endif %}" href="/contact" {% if request.path == '/contact' %}aria-current="page"{% endif %}>Contact</a>
                         </li>
                     </ul>
-                    <button id="darkModeToggle" type="button" class="btn btn-outline-light ms-3" aria-label="Toggle dark mode">
-                        <i id="darkModeIcon" class="bi bi-moon-fill" aria-hidden="true"></i>
-                    </button>
+                    <div class="d-flex align-items-center ms-3">
+                        <button id="darkModeToggle" type="button" class="btn btn-outline-light" aria-label="Toggle dark mode">
+                            <i id="darkModeIcon" class="bi bi-moon-fill" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown ms-3">
+                            <button class="btn btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-globe"></i> <span id="currentLanguage">EN</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item" href="#" data-lang="en">English</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="es">Español</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="fr">Français</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="de">Deutsch</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <main id="mainContent" tabindex="-1">
+    <main id="mainContent" class="flex-grow-1" tabindex="-1">
         <div class="container my-4">
             {% block content %}{% endblock %}
         </div>
     </main>
-    <footer class="bg-dark text-white py-3 mt-auto">
+    <footer class="bg-dark text-white py-3">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; 2023 Dark Triad Research Team. All rights reserved.</p>
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Dark Triad Research Team is dedicated to exploring the complexities of human personality, focusing on the Dark Triad traits.</p>
                 </div>
-                <div class="col-md-6">
-                    <ul class="list-inline text-md-end">
-                        <li class="list-inline-item"><a href="/privacy_policy">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="/terms_of_service">Terms of Service</a></li>
-                        <li class="list-inline-item"><a href="/contact">Contact Us</a></li>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/privacy_policy">Privacy Policy</a></li>
+                        <li><a href="/terms_of_service">Terms of Service</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/sitemap">Sitemap</a></li>
                     </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://twitter.com/DarkTriadResearch" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="bi bi-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.facebook.com/DarkTriadResearch" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/company/dark-triad-research" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; {% now 'Y' %} Dark Triad Research Team. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Designed and developed with <i class="bi bi-heart-fill text-danger"></i> by our team</p>
                 </div>
             </div>
         </div>
     </footer>
-    <script src="/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="/js/darkmode.js"></script>
+    <script src="/js/language.js"></script>
+    <script src="/js/accessibility.js"></script>
+    <script src="/js/analytics.js"></script>
     <script src="/bundle.js"></script>
     {% block scripts %}{% endblock %}
 </body>
-</html>
 </html>

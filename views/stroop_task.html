@@ -1,111 +1,34 @@
-{% extends "base.html" %}
-
-{% block title %}Stroop Task | Dark Triad Personality Assessments{% endblock %}
-
-{% block content %}
-<section id="stroopTask">
-    <h2>Stroop Task</h2>
-    <div id="stroopInstructions">
-        <p>Test your cognitive flexibility with the Stroop Task. This classic psychological test measures your ability to process conflicting information.</p>
-        <p>In this task, you will be presented with a series of color words (e.g., "red", "blue", "green") displayed in different font colors. Your goal is to identify the font color of each word, ignoring the meaning of the word itself.</p>
-        <p>For example, if the word "red" is displayed in a blue font color, the correct answer would be "blue".</p>
-        <p>The task will become increasingly challenging as you progress, with the font colors and word meanings becoming more incongruent. This tests your ability to inhibit your automatic response (reading the word) and focus on the relevant information (the font color).</p>
-        <p>To begin the Stroop Task, click the "Start" button below. You will have a limited time to respond to each word, so try to answer as quickly and accurately as possible. Your reaction time and accuracy will be measured and displayed at the end of the task.</p>
-        <p>Good luck!</p>
-        <button type="button" onclick="startStroopTask()" aria-label="Begin Stroop Task" class="btn btn-primary mt-3">Start Stroop Task</button>
-    </div>
-    <div id="stroopGameContainer" class="hidden" aria-hidden="true">
-        <div id="stroopWordDisplay" class="text-center mt-5 display-1"></div>
-        <div class="text-center mt-4">
-            <button type="button" onclick="selectColor('red')" class="btn btn-danger mr-3">Red</button>
-            <button type="button" onclick="selectColor('blue')" class="btn btn-primary mr-3">Blue</button>
-            <button type="button" onclick="selectColor('green')" class="btn btn-success mr-3">Green</button>
-            <button type="button" onclick="selectColor('yellow')" class="btn btn-warning mr-3">Yellow</button>
-            <button type="button" onclick="selectColor('purple')" class="btn btn-secondary">Purple</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Task</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="stroop-container">
+        <h1>Stroop Task</h1>
+        <div id="instruction">
+            <p>Name the <strong>color</strong> of the word, not the word itself.</p>
+            <button id="start-btn">Start</button>
         </div>
-        <div class="stroop-progress mt-4">
-            <div class="progress">
-                <div class="progress-bar initial-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Time progress"></div>
+        <div id="task">
+            <div id="word"></div>
+            <div id="buttons">
+                <button class="color-btn" data-color="red">Red</button>
+                <button class="color-btn" data-color="blue">Blue</button>
+                <button class="color-btn" data-color="green">Green</button>
+                <button class="color-btn" data-color="yellow">Yellow</button>
             </div>
-            <p class="text-center mt-2">Time remaining: <span id="timeRemaining">60</span> seconds</p>
-            <p class="text-center">Score: <span id="currentScore">0</span> points</p>
+        </div>
+        <div id="results" style="display: none;">
+            <h2>Results</h2>
+            <p>Average reaction time: <span id="avg-time"></span> ms</p>
+            <p>Accuracy: <span id="accuracy"></span>%</p>
+            <button id="retry-btn">Try Again</button>
         </div>
     </div>
-    <div id="stroopResults" class="hidden text-center mt-5" aria-hidden="true">
-        <h3>Stroop Task Results</h3>
-        <p class="mt-3">Accuracy: <span id="accuracyScore"></span>%</p>
-        <p>Average Reaction Time: <span id="avgReactionTime"></span> ms</p>
-        <p>Total Score: <span id="totalScore"></span> points</p>
-        <div class="mt-4">
-            <button type="button" onclick="restartStroopTask()" class="btn btn-primary mr-3">Restart Task</button>
-            <button type="button" onclick="shareResults()" class="btn btn-success">Share Results</button>
-        </div>
-    </div>
-    <div id="stroopLeaderboardSection" class="hidden text-center mt-5" aria-hidden="true">
-        <h3>Leaderboard</h3>
-        <table class="table mt-3">
-            <thead>
-                <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Score</th>
-                </tr>
-            </thead>
-            <tbody id="leaderboardBody"></tbody>
-        </table>
-    </div>
-</section>
-{% endblock %}
-<section id="stroopTask">
-    <h2>Stroop Task</h2>
-    <div id="stroopInstructions">
-        <p>Test your cognitive flexibility with the Stroop Task. This classic psychological test measures your ability to process conflicting information.</p>
-        <p>In this task, you will be presented with a series of color words (e.g., "red", "blue", "green") displayed in different font colors. Your goal is to identify the font color of each word, ignoring the meaning of the word itself.</p>
-        <p>For example, if the word "red" is displayed in a blue font color, the correct answer would be "blue".</p>
-        <p>The task will become increasingly challenging as you progress, with the font colors and word meanings becoming more incongruent. This tests your ability to inhibit your automatic response (reading the word) and focus on the relevant information (the font color).</p>
-        <p>To begin the Stroop Task, click the "Start" button below. You will have a limited time to respond to each word, so try to answer as quickly and accurately as possible. Your reaction time and accuracy will be measured and displayed at the end of the task.</p>
-        <p>Good luck!</p>
-        <button type="button" onclick="startStroopTask()" aria-label="Begin Stroop Task" class="btn btn-primary mt-3">Start Stroop Task</button>
-    </div>
-    <div id="stroopGameContainer" class="hidden" aria-hidden="true">
-        <div id="stroopWordDisplay" class="text-center mt-5 display-1"></div>
-        <div class="text-center mt-4">
-            <button type="button" onclick="selectColor('red')" class="btn btn-danger mr-3">Red</button>
-            <button type="button" onclick="selectColor('blue')" class="btn btn-primary mr-3">Blue</button>
-            <button type="button" onclick="selectColor('green')" class="btn btn-success mr-3">Green</button>
-            <button type="button" onclick="selectColor('yellow')" class="btn btn-warning mr-3">Yellow</button>
-            <button type="button" onclick="selectColor('purple')" class="btn btn-secondary">Purple</button>
-        </div>
-        <div class="stroop-progress mt-4">
-            <div class="progress">
-                <div class="progress-bar initial-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Time progress"></div>
-            </div>
-            <p class="text-center mt-2">Time remaining: <span id="timeRemaining">60</span> seconds</p>
-            <p class="text-center">Score: <span id="currentScore">0</span> points</p>
-        </div>
-    </div>
-    <div id="stroopResultsSection" class="hidden text-center mt-5" aria-hidden="true">
-        <h3>Stroop Task Results</h3>
-        <p class="mt-3">Accuracy: <span id="accuracyScore"></span>%</p>
-        <p>Average Reaction Time: <span id="avgReactionTime"></span> ms</p>
-        <p>Total Score: <span id="totalScore"></span> points</p>
-        <div class="mt-4">
-            <button type="button" onclick="restartStroopTask()" class="btn btn-primary mr-3">Restart Task</button>
-            <button type="button" onclick="shareResults()" class="btn btn-success">Share Results</button>
-        </div>
-    </div>
-    <div id="stroopLeaderboardSection" class="hidden text-center mt-5" aria-hidden="true">
-        <h3>Leaderboard</h3>
-        <table class="table mt-3">
-            <thead>
-                <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Score</th>
-                </tr>
-            </thead>
-            <tbody id="leaderboardBody"></tbody>
-        </table>
-    </div>
-</section>
-{% endblock %}
+    <script src="/js/stroop_task.js"></script>
+</body>
+</html>
