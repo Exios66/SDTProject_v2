@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "webpack --mode production",
-    "dev": "webpack serve --mode development",
+    "dev": "webpack serve --mode development --open --port 3001",
     "test": "jest"
   },
   "dependencies": {
@@ -28,7 +28,10 @@
     "gh-pages": "^5.0.0",
     "nodemon": "^3.0.1",
     "webpack": "^5.88.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "style-loader": "^3.3.3",
+    "css-loader": "^6.8.1"
   },
   "engines": {
     "node": ">=14.0.0"
