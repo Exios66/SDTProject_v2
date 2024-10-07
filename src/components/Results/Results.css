@@ -1,0 +1,31 @@
+.results-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.trait-result {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.trait-result h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.trait-result p {
+  margin-bottom: 5px;
+}
+
+.score {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.interpretation {
+  font-style: italic;
+  color: #666;
+}

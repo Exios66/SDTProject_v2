@@ -1,39 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { HashRouter as Router } from 'react-router-dom';
-import { AssessmentProvider } from './contexts/AssessmentContext';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Navigation from './components/Navigation/Navigation';
-import AssessmentSelector from './components/AssessmentSelector/AssessmentSelector';
-import Results from './components/Results/Results';
-import DarkModeToggle from './components/DarkModeToggle/DarkModeToggle';
-import Intro from './components/Intro/Intro';
+import Home from './components/Home/Home';
+import SDT4 from './components/assessments/SDT4/SDT4';
+import Footer from './components/Footer/Footer';
 import './App.css';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowIntro(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <Router basename="/dark-triad-assessments">
-      <AssessmentProvider>
-        <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
-          {showIntro && <Intro />}
-          <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
-          <Header />
-          <Navigation />
-          <main>
-            <AssessmentSelector />
-            <Results />
-          </main>
-        </div>
-      </AssessmentProvider>
+    <Router>
+      <div className="App">
+        <Header />
+        <main>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/sdt4" component={SDT4} />
+            <Route path="/hexaco" component={HEXACO} />
+            <Route path="/dark-triad" component={DarkTriad} />
+            <Route path="/big-five" component={BigFive} />
+            <Route path="/narcissism" component={Narcissism} />
+            <Route path="/machiavellianism" component={Machiavellianism} />
+            <Route path="/psychopathy" component={Psychopathy} />
+          </Switch>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }
